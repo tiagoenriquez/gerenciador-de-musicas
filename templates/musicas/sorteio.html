@@ -1,0 +1,14 @@
+{% extends "template.html" %}
+{% block content %}
+<h1>Sorteio de música</h1>
+<form action="{{ url_for('musica.sortear') }}" method="post">
+    <div class="row">
+        <label for="nacional">Nacional?</label>
+        <select name="nacional" id="nacional">
+            <option value="1">Sim</option>
+            <option value="0">Não</option>
+        </select>
+    </div>
+    <button type="submit">Sortear</button>
+</form>
+{% endblock %}

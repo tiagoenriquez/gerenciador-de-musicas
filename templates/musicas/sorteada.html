@@ -1,0 +1,23 @@
+{% extends "template.html" %}
+{% block content %}
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <h1>Música Sorteada:</h1>
+            </td>
+            <td>
+                <h1>{{ musica['nome'] }}</h1>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h1>De:</h1>
+            </td>
+            <td><h1>
+                {{ musica['artista']['nome'] }}</h1>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "template.html" %}
+{% block content %}
+<h1>Edição de música</h1>
+<form action="{{ url_for('musica.atualizar', id=musica['id']) }}" method="post">
+    <div class="row">
+        <label for="nome">Nome</label>
+        <input type="text" name="nome" id="nome" value="{{ musica['nome'] }}" autofocus required />
+    </div>
+    <div class="row">
+        <label for="artista">Artista</label>
+        <select name="artista_id" id="artista">
+            <option value="{{ musica['artista']['id'] }}">{{ musica['artista']['nome'] }}</option>
+            {% for artista in artistas %}
+            <option value="{{ artista['id'] }}">{{ artista['nome'] }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit">Atualizar</button>
+</form>
+{% endblock %}

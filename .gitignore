@@ -1,0 +1,70 @@
+# Bytecode e cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Banco de dados SQLite
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+
+# Ambientes virtuais
+.env/
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Logs e arquivos temporários
+*.log
+*.pot
+*.mo
+*.tmp
+
+# Diretórios de build e distribuição
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+MANIFEST
+
+# Relatórios de testes
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.pytest_cache/
+.hypothesis/
+
+# Configurações locais
+instance/
+.webassets-cache
+*.env
+.envrc
+
+# IDEs e editores
+.vscode/
+.idea/
+.spyderproject
+.spyproject
+.ropeproject
+
+# Jupyter
+.ipynb_checkpoints
+
+# Outros
+.mypy_cache/
+.pyre/
+.pytype/
+cython_debug/
+
+rascunho.txt

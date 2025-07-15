@@ -1,0 +1,19 @@
+{% extends "template.html" %}
+{% block content %}
+<h1>Edição de artista</h1>
+<form action="{{ url_for('artista.atualizar', id=artista['id']) }}" method="post">
+    <div class="row">
+        <label for="nome">Nome</label>
+        <input type="text" name="nome" id="nome" value="{{ artista.nome }}" autofocus required />
+    </div>
+    <div class="row">
+        <label for="nacional">Nacional?</label>
+        <select name="nacional" id="nacional">
+            <option value="{{ artista.nacional }}">{{ 'Sim' if artista.nacional else 'Não' }}</option>
+            <option value="1">Sim</option>
+            <option value="0">Não</option>
+        </select>
+    </div>
+    <button type="submit">Atualizar</button>
+</form>
+{% endblock %}

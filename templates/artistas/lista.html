@@ -1,0 +1,34 @@
+{% extends "template.html" %}
+{% block content %}
+<h1>Artistas {{ 'nacionais' if artistas[0]['nacional'] else 'internacionais' }}</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th colspan="3"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for artista in artistas %}
+        <tr>
+            <td>{{ artista.nome }}</td>
+            <td>
+                <form action="{{ url_for('artista.editar', id=artista['id']) }}" method="get">
+                    <button type="submit">Editar</button>
+                </form>
+            </td>
+            <td>
+                <form action="{{ url_for('artista.excluir', id=artista['id']) }}" method="get">
+                    <button type="submit">Excluir</button>
+                </form>
+            </td>
+            <td>
+                <form action="{{ url_for('musica.listar', artista_id=artista['id']) }}" method="get">
+                    <button type="submit">Listar músicas</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

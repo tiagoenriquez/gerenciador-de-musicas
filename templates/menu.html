@@ -1,0 +1,8 @@
+<nav>
+    <a href="{{ url_for('musica.contar') }}">Contar músicas</a>
+    <a href="{{ url_for('musica.cadastrar_sorteio') }}">Sortear música</a>
+    <a href="{{ url_for('musica.cadastrar') }}">Cadastrar música</a>
+    <a href="{{ url_for('artista.cadastrar') }}">Cadastrar artista</a>
+    <a href="{{ url_for('artista.listar', nacional=1) }}">Artistas nacionais</a>
+    <a href="{{ url_for('artista.listar', nacional=0) }}">Artistas internacionais</a>
+</nav>

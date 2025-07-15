@@ -1,0 +1,29 @@
+{% extends "template.html" %}
+{% block content %}
+<h1>Músicas de {{ artista.nome }}</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Música</th>
+            <th colspan="2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for musica in musicas %}
+        <tr>
+            <td>{{ musica.nome }}</td>
+            <td>
+                <form action="{{ url_for('musica.editar', id=musica['id']) }}" method="get">
+                    <button type="submit">Editar</button>
+                </form>
+            </td>
+            <td>
+                <form action="{{ url_for('musica.excluir', id=musica['id']) }}" method="get">
+                    <button type="submit">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
