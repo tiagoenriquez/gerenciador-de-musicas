@@ -5,13 +5,15 @@
     <thead>
         <tr>
             <th>Nome</th>
+            <th>Nº de músicas</th>
             <th colspan="3"></th>
         </tr>
     </thead>
     <tbody>
         {% for artista in artistas %}
         <tr>
-            <td>{{ artista.nome }}</td>
+            <td>{{ artista['nome'] }}</td>
+            <td>{{ artista['n_musicas'] }}</td>
             <td>
                 <form action="{{ url_for('artista.editar', id=artista['id']) }}" method="get">
                     <button type="submit">Editar</button>

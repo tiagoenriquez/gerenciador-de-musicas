@@ -25,6 +25,11 @@ class ArtistaSchema(Schema):
         }
     )
 
+    n_musicas = fields.Method("get_n_musicas")
+
     @post_load
     def make_artista(self, data, **kwargs) -> "Artista":
         return Artista(**data)
+    
+    def get_n_musicas(self, obj) -> int:
+        return obj.n_musicas

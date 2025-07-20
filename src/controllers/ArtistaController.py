@@ -28,7 +28,8 @@ def inserir() -> Response:
 
 def listar(nacional: int) -> str:
     try:
-        artistas = ArtistaService.listar_por_nacional(bool(nacional))
+        raw = ArtistaService.listar_por_nacional(bool(nacional))
+        artistas = [cast(tuple, artista)[0] for artista in raw]
         schema = ArtistaSchema(many=True).dump(artistas)
         return render_template("artistas/lista.html", artistas=schema)
     except Exception as e:

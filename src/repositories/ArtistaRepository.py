@@ -1,6 +1,8 @@
+from sqlalchemy import desc, func
 from src.connections.DatabaseConnection import db
 from src.models.Artista import Artista
-from typing import Optional, List
+from src.models.Musica import Musica
+from typing import Optional, List, cast
 
 
 class ArtistaRepository:
@@ -26,7 +28,17 @@ class ArtistaRepository:
 
     @staticmethod
     def buscar_por_nacional(nacional: bool) -> List[Artista]:
-        return Artista.query.filter_by(nacional=nacional).order_by(Artista.nome.asc()).all()
+        query = (
+            db.session.query(
+                Artista,
+                func.count(Musica.id).label("n_musicas")
+            )
+            .outerjoin(Musica, Artista.id == Musica.artista_id)
+            .filter(Artista.nacional == nacional)
+            .group_by(Artista.id)
+            .order_by(func.count(Musica.id).desc() if desc else func.count(Musica.id).asc())
+            .order_by(Artista.nome.asc()))
+        return cast(List[Artista], query.all())
 
     @staticmethod
     def buscar_por_nome(nome: str) -> Optional[Artista]:
