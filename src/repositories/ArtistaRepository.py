@@ -38,7 +38,7 @@ class ArtistaRepository:
             .group_by(Artista.id)
             .order_by(func.count(Musica.id).desc() if desc else func.count(Musica.id).asc())
             .order_by(Artista.nome.asc()))
-        return cast(List[Artista], query.all())
+        return [row[0] for row in query]
 
     @staticmethod
     def buscar_por_nome(nome: str) -> Optional[Artista]:
