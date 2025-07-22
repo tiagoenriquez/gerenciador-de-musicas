@@ -11,7 +11,7 @@ class ArtistaRepository:
         db.session.add(artista)
         db.session.commit()
         return artista
-    
+
     @staticmethod
     def atualizar(artista: Artista) -> Artista:
         existente = Artista.query.get(artista.id)
@@ -29,21 +29,21 @@ class ArtistaRepository:
     @staticmethod
     def buscar_por_nacional(nacional: bool) -> List[Artista]:
         query = (
-            db.session.query(
-                Artista,
-                func.count(Musica.id).label("n_musicas")
-            )
+            db.session.query(Artista, func.count(Musica.id).label("n_musicas"))
             .outerjoin(Musica, Artista.id == Musica.artista_id)
             .filter(Artista.nacional == nacional)
             .group_by(Artista.id)
-            .order_by(func.count(Musica.id).desc() if desc else func.count(Musica.id).asc())
-            .order_by(Artista.nome.asc()))
+            .order_by(
+                func.count(Musica.id).desc() if desc else func.count(Musica.id).asc()
+            )
+            .order_by(Artista.nome.asc())
+        )
         return [row[0] for row in query]
 
     @staticmethod
     def buscar_por_nome(nome: str) -> Optional[Artista]:
         return Artista.query.filter_by(nome=nome).first()
-    
+
     @staticmethod
     def listar_todos() -> List[Artista]:
         return Artista.query.order_by(Artista.nome.asc()).all()

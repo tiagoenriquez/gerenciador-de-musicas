@@ -8,6 +8,6 @@ class NacionalSchema(Schema):
         falsy=["0", "false", "False", False],
         error_messages={
             "required": "Você precisa informar se o artista é nacional ou não.",
-            "invalid": "Valor inválido para o campo nacional. Use 'Sim' ou 'Não'."
-        }
+            "invalid": "Valor inválido para o campo nacional. Use 'Sim' ou 'Não'.",
+        },
     )

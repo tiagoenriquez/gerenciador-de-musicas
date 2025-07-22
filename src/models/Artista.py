@@ -9,7 +9,9 @@ class Artista(db.Model):
     nome = db.Column(db.String(63), nullable=False, unique=True)
     nacional = db.Column(db.Boolean, nullable=False)
 
-    musicas = db.relationship("Musica", back_populates="artista", cascade="all, delete-orphan")
+    musicas = db.relationship(
+        "Musica", back_populates="artista", cascade="all, delete-orphan"
+    )
 
     @property
     def n_musicas(self) -> int:

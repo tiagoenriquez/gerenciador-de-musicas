@@ -1,6 +1,7 @@
 from src.connections.DatabaseConnection import db
 from src.models.Artista import Artista
 
+
 class Musica(db.Model):
     __tablename__ = "musicas"
 

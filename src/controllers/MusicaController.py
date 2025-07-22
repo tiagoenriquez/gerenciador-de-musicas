@@ -40,7 +40,9 @@ def listar(artista_id: int) -> str:
         artista = ArtistaService.buscar_por_id(artista_id)
         musicas_schema = MusicaSchema(many=True).dump(musicas)
         artista_schema = ArtistaSchema().dump(artista)
-        return render_template("musicas/lista.html", musicas=musicas_schema, artista=artista_schema)
+        return render_template(
+            "musicas/lista.html", musicas=musicas_schema, artista=artista_schema
+        )
     except Exception as e:
         return render_template("erro.html", erro=str(e))
 
@@ -51,7 +53,9 @@ def editar(id: int) -> str:
         artistas = ArtistaService.listar_todos()
         musica_schema = MusicaSchema().dump(musica)
         artistas_schema = ArtistaSchema(many=True).dump(artistas)
-        return render_template("musicas/edicao.html", musica=musica_schema, artistas=artistas_schema)
+        return render_template(
+            "musicas/edicao.html", musica=musica_schema, artistas=artistas_schema
+        )
     except Exception as e:
         return render_template("erro.html", erro=str(e))
 
@@ -76,7 +80,7 @@ def excluir(id: int) -> Response:
     try:
         musica = MusicaService.excluir(id)
         flash("A música foi excluída com sucesso.", "sucesso")
-        return redirect(url_for("musica.listar", artista_id = musica.artista_id))
+        return redirect(url_for("musica.listar", artista_id=musica.artista_id))
     except Exception as e:
         flash(str(e), "erro")
         return redirect(url_for("musica.contar"))
@@ -88,7 +92,9 @@ def cadastrar_sorteio() -> str:
 
 def sortear() -> str:
     try:
-        nacional = cast(dict[str, bool], NacionalSchema().load(request.form))["nacional"]
+        nacional = cast(dict[str, bool], NacionalSchema().load(request.form))[
+            "nacional"
+        ]
         musica = MusicaService.sortear(nacional)
         schema = MusicaSchema().dump(musica)
         return render_template("musicas/sorteada.html", musica=schema)
@@ -100,6 +106,12 @@ def contar() -> str:
     try:
         nacionais = MusicaService.contar(True)
         internacionais = MusicaService.contar(False)
-        return render_template("index.html", nacionais=nacionais, internacionais=internacionais)
+        total = nacionais + internacionais
+        return render_template(
+            "index.html",
+            nacionais=nacionais,
+            internacionais=internacionais,
+            total=total,
+        )
     except Exception as e:
         return render_template("erro.html", erro=str(e))

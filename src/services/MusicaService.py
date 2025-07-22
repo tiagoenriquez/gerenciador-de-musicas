@@ -49,9 +49,11 @@ class MusicaService:
     def sortear(nacional: bool) -> Musica:
         musica = MusicaRepository.sortear(nacional)
         if not musica:
-            raise LookupError(f"Não há musica {'nacional' if nacional else 'internacional'} cadastrada.")
+            raise LookupError(
+                f"Não há musica {'nacional' if nacional else 'internacional'} cadastrada."
+            )
         return musica
-    
+
     @staticmethod
     def contar(nacional: bool) -> int:
         return MusicaRepository.contar(nacional)

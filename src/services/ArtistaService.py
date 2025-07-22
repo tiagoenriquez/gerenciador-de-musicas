@@ -30,7 +30,9 @@ class ArtistaService:
     def listar_por_nacional(nacional: bool) -> List[Artista]:
         artistas = ArtistaRepository.buscar_por_nacional(nacional)
         if not artistas:
-            raise LookupError(f"Não há artista {'nacional' if nacional else 'internacional'} cadastrado.")
+            raise LookupError(
+                f"Não há artista {'nacional' if nacional else 'internacional'} cadastrado."
+            )
         return artistas
 
     @staticmethod
