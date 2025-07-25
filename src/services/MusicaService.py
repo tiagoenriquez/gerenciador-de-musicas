@@ -40,6 +40,13 @@ class MusicaService:
         return MusicaService.__buscar_ou_lancar_erro(id)
 
     @staticmethod
+    def buscar_por_trecho(trecho: str) -> List[Musica]:
+        musicas = MusicaRepository.buscar_por_trecho(trecho)
+        if not musicas:
+            raise LookupError("Nenhuma música foi encontrada com o trecho informado.")
+        return musicas
+
+    @staticmethod
     def excluir(id: int) -> Musica:
         musica = MusicaService.__buscar_ou_lancar_erro(id)
         MusicaRepository.deletar(musica)

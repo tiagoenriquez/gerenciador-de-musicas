@@ -7,6 +7,7 @@ from src.models.Musica import Musica
 from src.schemas.ArtistaSchema import ArtistaSchema
 from src.schemas.MusicaSchema import MusicaSchema
 from src.schemas.NacionalSchema import NacionalSchema
+from src.schemas.TrechoSchema import TrechoSchema
 from src.services.ArtistaService import ArtistaService
 from src.services.MusicaService import MusicaService
 
@@ -113,5 +114,19 @@ def contar() -> str:
             internacionais=internacionais,
             total=total,
         )
+    except Exception as e:
+        return render_template("erro.html", erro=str(e))
+
+
+def cadastrar_procura() -> str:
+    return render_template("musicas/procura.html")
+
+
+def procurar() -> str:
+    try:
+        trecho = cast(dict[str, str], TrechoSchema().load(request.form))["trecho"]
+        musicas = MusicaService.buscar_por_trecho(trecho)
+        schema = MusicaSchema(many=True).dump(musicas)
+        return render_template("musicas/encontradas.html", musicas=schema)
     except Exception as e:
         return render_template("erro.html", erro=str(e))

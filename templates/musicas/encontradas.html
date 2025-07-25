@@ -1,0 +1,28 @@
+{% extends "template.html" %}
+{% block content %}
+<h1>Músicas com o trecho informado</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Música</th>
+            <th>Artista</th>
+            <th>Nacional</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for musica in musicas %}
+        <tr>
+            <td>{{ musica['nome'] }}</td>
+            <td>{{ musica['artista']['nome'] }}</td>
+            <td>
+                {% if musica['artista']['nacional'] %}
+                Sim
+                {% else %}
+                Não
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

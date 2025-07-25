@@ -1,0 +1,11 @@
+{% extends "template.html" %}
+{% block content %}
+<h1>Procura por Música</h1>
+<form action="{{ url_for('musica.procurar') }}" method="post">
+    <div class="row">
+        <label for="trecho">Trecho</label>
+        <input type="text" name="trecho" id="trecho" autofocus required />
+    </div>
+    <button type="submit">Procurar</button>
+</form>
+{% endblock %}

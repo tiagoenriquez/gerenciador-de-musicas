@@ -30,6 +30,10 @@ class MusicaRepository:
         return Musica.query.filter_by(nome=nome).all()
 
     @staticmethod
+    def buscar_por_trecho(trecho: str) -> List[Musica]:
+        return Musica.query.filter(Musica.nome.ilike(f"%{trecho}%")).all()
+
+    @staticmethod
     def listar_por_artista(artista_id: int) -> List[Musica]:
         return (
             Musica.query.filter_by(artista_id=artista_id)
